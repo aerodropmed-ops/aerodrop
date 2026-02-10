@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient - Drone Medicine Delivery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Patient Portal</h1>
+
+    <form id="orderForm">
+        <label>Floor Number:</label>
+        <input type="number" id="floor" required>
+
+        <label>Room Number:</label>
+        <input type="number" id="room" required>
+
+        <label>Patient Name:</label>
+        <input type="text" id="patient" required>
+
+        <label>Medicine:</label>
+        <select id="medicine" required>
+            <option value="">-- Select --</option>
+            <option>Paracetamol</option>
+            <option>Insulin</option>
+            <option>Panadol</option>
+            <option>Amoxicillin</option>
+        </select>
+
+        <br><br>
+        <input type="checkbox" id="emergency"> Emergency Delivery
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <div id="statusBox" style="display:none;">
+        <h3 id="statusText"></h3>
+        <button id="receivedBtn" style="display:none;">Order Received</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Pharmacy Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Pharmacy Admin Panel</h1>
+
+    <table border="1" width="100%" cellpadding="8">
+        <tr>
+            <th>Patient</th>
+            <th>Medicine</th>
+            <th>Status</th>
+        </tr>
+        <tr id="row">
+            <td id="pname"></td>
+            <td id="pmed"></td>
+            <td id="pstatus"></td>
+        </tr>
+    </table>
+
+    <br>
+    <button onclick="acceptOrder()">Accept Order</button>
+    <button onclick="startDelivery()">Start Delivery</button>
+</div>
+
+<script>
+    function loadOrder() {
+        pname.innerText = localStorage.getItem("patient");
+        pmed.innerText = localStorage.getItem("medicine");
+
+        let status = localStorage.getItem("orderStatus");
+
+        if (status === "placed") pstatus.innerText = "New Order";
+        if (status === "processing") pstatus.innerText = "Preparing Drone";
+        if (status === "delivering") pstatus.innerText = "Delivery in Process";
+        if (status === "completed") pstatus.innerText = "Completed";
+
+        if (localStorage.getItem("emergency") === "true") {
+            document.getElementById("row").style.backgroundColor = "#ffcccc";
+        }
+    }
+
+    setInterval(loadOrder, 1000);
+
+    function acceptOrder() {
+        localStorage.setItem("orderStatus", "processing");
+    }
+
+    function startDelivery() {
+        localStorage.setItem("orderStatus", "delivering");
+    }
+</script>
+
+</body>
+</html>
