@@ -41,5 +41,24 @@
 </div>
 
 <script src="script.js"></script>
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDvyPG76e2euLeoSmeQWTsAStrDk4nLP-o",
+  authDomain: "drone-delivery-med.firebaseapp.com",
+  databaseURL: "https://drone-delivery-med-default-rtdb.firebaseio.com",
+  projectId: "drone-delivery-med",
+  storageBucket: "drone-delivery-med.firebasestorage.app",
+  messagingSenderId: "937199415807",
+  appId: "1:937199415807:web:6751fc08096b2d24b9f7ca"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 </body>
 </html>
+
