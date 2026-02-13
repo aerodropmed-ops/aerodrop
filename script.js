@@ -17,25 +17,36 @@ form.addEventListener("submit", function(e) {
     statusBox.style.display = "block";
     statusText.innerText = "⏳ Order placed. Waiting for pharmacy...";
 });
-function placeOrder() {
-    const patientName = document.getElementById("patientName").value;
-    const medicine = document.getElementById("medicine").value;
 
-    if (patientName === "" || medicine === "") {
-        alert("Please fill all fields");
-        return;
-    }
 
-    const ordersRef = ref(window.database, "orders");
+orderBtn.addEventListener("click", function() {
+  console.log("Button clicked");
 
-    push(ordersRef, {
-        patientName: patientName,
-        medicine: medicine,
-        status: "Pending"
-    });
+  const patientName = document.getElementById("patientName").value;
+  const medicine = document.getElementById("medicine").value;
 
+  if (patientName === "" || medicine === "") {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const ordersRef = ref(database, "orders");
+
+  push(ordersRef, {
+    patientName: patientName,
+    medicine: medicine,
+    status: "Pending"
+  })
+  .then(() => {
+    console.log("Data pushed successfully");
     alert("Order Placed Successfully!");
-}
+  })
+  .catch((error) => {
+    console.error("Error pushing data:", error);
+  });
+});
+
+
 
 // Check status every second
 setInterval(() => {
@@ -58,4 +69,5 @@ setInterval(() => {
 receivedBtn.addEventListener("click", () => {
     localStorage.setItem("orderStatus", "completed");
 });
+
 
