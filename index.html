@@ -1,47 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Patient - Drone Medicine Delivery</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Patient Portal - Drone Medicine Delivery</title>
 </head>
 <body>
 
-<div class="container">
-    <h1>Patient Portal</h1>
+    <h2>Patient Portal</h2>
 
-    <form id="orderForm">
-        <label>Floor Number:</label>
-        <input type="number" id="floor" required>
+    <input type="text" id="patientName" placeholder="Enter Patient Name"><br><br>
+    <input type="text" id="medicine" placeholder="Enter Medicine Name"><br><br>
 
-        <label>Room Number:</label>
-        <input type="number" id="room" required>
+    <button id="orderBtn">Place Order</button>
 
-        <label>Patient Name:</label>
-        <input type="text" id="patient" required>
-
-        <label>Medicine:</label>
-        <select id="medicine" required>
-            <option value="">-- Select --</option>
-            <option>Paracetamol</option>
-            <option>Insulin</option>
-            <option>Panadol</option>
-            <option>Amoxicillin</option>
-        </select>
-
-        <br><br>
-        <input type="checkbox" id="emergency"> Emergency Delivery
-        <button onclick="placeOrder()">Place Order</button>
-    </form>
-
-    <div id="statusBox" style="display:none;">
-        <h3 id="statusText"></h3>
-        <button id="receivedBtn" style="display:none;">Order Received</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
-<script type="module">
-import { initializeApp } from "firebase/app";
+    <script type="module">
+      import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyDvyPG76e2euLeoSmeQWTsAStrDk4nLP-o",
   authDomain: "drone-delivery-med.firebaseapp.com",
@@ -52,10 +24,32 @@ const firebaseConfig = {
   appId: "1:937199415807:web:6751fc08096b2d24b9f7ca"
 };
 const app = initializeApp(firebaseConfig);
-</script>
+      const database = getDatabase(app);
+
+      const orderBtn = document.getElementById("orderBtn");
+
+      orderBtn.addEventListener("click", function() {
+          const patientName = document.getElementById("patientName").value;
+          const medicine = document.getElementById("medicine").value;
+
+          if (patientName === "" || medicine === "") {
+              alert("Please fill all fields");
+              return;
+          }
+
+          const ordersRef = ref(database, "orders");
+
+          push(ordersRef, {
+              patientName: patientName,
+              medicine: medicine,
+              status: "Pending"
+          });
+
+          alert("Order Placed Successfully!");
+      });
+    </script>
+
 </body>
 </html>
-
-
 
 
