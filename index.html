@@ -12,44 +12,51 @@
 
     <button id="orderBtn">Place Order</button>
 
-    <script type="module">
-      import { initializeApp } from "firebase/app";
-const firebaseConfig = {
-  apiKey: "AIzaSyDvyPG76e2euLeoSmeQWTsAStrDk4nLP-o",
-  authDomain: "drone-delivery-med.firebaseapp.com",
-  databaseURL: "https://drone-delivery-med-default-rtdb.firebaseio.com/",
-  projectId: "drone-delivery-med",
-  storageBucket: "drone-delivery-med.firebasestorage.app",
-  messagingSenderId: "937199415807",
-  appId: "1:937199415807:web:6751fc08096b2d24b9f7ca"
-};
-const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
+   <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-      const orderBtn = document.getElementById("orderBtn");
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvyPG76e2euLeoSmeQWTsAStrDk4nLP-o",
+    authDomain: "drone-delivery-med.firebaseapp.com",
+    databaseURL: "https://drone-delivery-med-default-rtdb.firebaseio.com",
+    projectId: "drone-delivery-med",
+    storageBucket: "drone-delivery-med.firebasestorage.app",
+    messagingSenderId: "937199415807",
+    appId: "1:937199415807:web:6751fc08096b2d24b9f7ca"
+  };
 
-      orderBtn.addEventListener("click", function() {
-          const patientName = document.getElementById("patientName").value;
-          const medicine = document.getElementById("medicine").value;
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
 
-          if (patientName === "" || medicine === "") {
-              alert("Please fill all fields");
-              return;
-          }
+  console.log("Firebase Connected Successfully");
 
-          const ordersRef = ref(database, "orders");
+  const orderBtn = document.getElementById("orderBtn");
 
-          push(ordersRef, {
-              patientName: patientName,
-              medicine: medicine,
-              status: "Pending"
-          });
+  orderBtn.addEventListener("click", function() {
+    const patientName = document.getElementById("patientName").value;
+    const medicine = document.getElementById("medicine").value;
 
-          alert("Order Placed Successfully!");
-      });
-    </script>
+    if (patientName === "" || medicine === "") {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const ordersRef = ref(database, "orders");
+
+    push(ordersRef, {
+      patientName: patientName,
+      medicine: medicine,
+      status: "Pending"
+    });
+
+    alert("Order Placed Successfully!");
+  });
+</script>
+
 
 </body>
 </html>
+
 
 
